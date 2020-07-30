@@ -17,12 +17,12 @@ import { createConnection } from 'typeorm';
 const app = express();
 const ssl = process.env.SSL_STATUS || 'false';
 const PORT = process.env.PORT || 3331;
+let server: any;
 
 CorsConf.init(app);
 RoutesConf.init(app);
 Routes.init(app);
 
-let server: any;
 if (ssl === 'true') {
   const key = process.env.SSL_KEY;
   const crt = process.env.SSL_CERT;
@@ -38,28 +38,16 @@ if (ssl === 'true') {
   server = http.createServer(app);
 }
 
-createConnection()
-  .then(async () => {
-    console.log(typeof server);
-    if (!server) {
+if (env !== 'test') {
+  createConnection()
+    .then(() => {
       server.listen(PORT, () => {
-        if (env !== 'test') {
-          console.log(`up and running @: ${os.hostname()} on port: ${PORT}`);
-          console.log(`enviroment: ${env}`);
-        }
+        console.log(`up and running @: ${os.hostname()} on port: ${PORT}`);
+        console.log(`enviroment: ${env}`);
       });
-    }
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+    })
+    .catch((e) => console.error(e));
+}
 
-process.on('SIGTERM', () => {
-  console.info('SIGTERM signal received.');
-  console.log('Closing http server.');
-  server.close(() => {
-    console.log('Http server closed.');
-  });
-});
 export default server;
 export { app };
