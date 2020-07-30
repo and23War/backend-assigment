@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
-dotenv.config();
+const env = process.env.NODE_ENV || 'development';
+dotenv.config({ path: `${process.cwd()}/.env${env === 'test' ? '.test' : ''}` });
 
 import 'reflect-metadata';
 import * as express from 'express';
@@ -39,14 +40,26 @@ if (ssl === 'true') {
 
 createConnection()
   .then(async () => {
-    server.listen(PORT, () => {
-      console.log(`up and running @: ${os.hostname()} on port: ${PORT}`);
-      console.log(`enviroment: ${process.env.NODE_ENV}`);
-    });
+    console.log(typeof server);
+    if (!server) {
+      server.listen(PORT, () => {
+        if (env !== 'test') {
+          console.log(`up and running @: ${os.hostname()} on port: ${PORT}`);
+          console.log(`enviroment: ${env}`);
+        }
+      });
+    }
   })
   .catch((error) => {
     console.log(error);
   });
 
+process.on('SIGTERM', () => {
+  console.info('SIGTERM signal received.');
+  console.log('Closing http server.');
+  server.close(() => {
+    console.log('Http server closed.');
+  });
+});
 export default server;
 export { app };
