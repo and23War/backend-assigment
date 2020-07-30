@@ -1,0 +1,12 @@
+{
+  "extends": "tslint-config-airbnb",
+  "defaultSeverity": "error",
+  "rules": {
+    "max-line-length": [true, {"limit": 150, "ignore-pattern": "^import |^export {(.*?)}"}]
+  },
+  "linterOptions": {
+    "exclude": [
+        "node_modules/"
+    ]
+  }
+}
