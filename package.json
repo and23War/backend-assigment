@@ -1,6 +1,6 @@
 {
   "name": "base-backend",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "dev": "set debug=* && ts-node-dev -r tsconfig-paths/register --respawn --transpile-only ./src/server/server.ts",
     "start": "ts-node -r tsconfig-paths/register ./src/server/server.ts",
