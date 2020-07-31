@@ -16,6 +16,7 @@ import { Validation } from '@/utils';
  * Business logics
  */
 import { AgentBusinessLogic } from '../bl/agent-bl';
+import { IssueBusinessLogic } from '../../issue/bl/issue-bl';
 
 /**
  * Handlers
@@ -29,9 +30,11 @@ import { Agent } from '../entity/agent-entity';
 
 export class AgentController {
   agent: AgentBusinessLogic;
+  issue: IssueBusinessLogic;
 
   constructor() {
     this.agent = new AgentBusinessLogic();
+    this.issue = new IssueBusinessLogic();
   }
 
   async create(req: Request, res: Response) {
@@ -54,6 +57,9 @@ export class AgentController {
       }
 
       const newAgent = await this.agent.create(agent);
+
+      // Search for an issue on status Open in the system to assign it to the agent
+      await this.issue.assignAgent(undefined, newAgent);
 
       res.status(201).json({
         data: { agent: newAgent },
