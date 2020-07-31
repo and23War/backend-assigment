@@ -9,8 +9,7 @@
     "migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate",
     "migration:create": "ts-node ./node_modules/typeorm/cli.js migration:create",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
