@@ -13,7 +13,10 @@ export class IssueRoutes {
 
     const issueController = new IssueController();
 
-    router.route('/issue').post((req, res) => issueController.create(req, res));
+    router
+      .route('/issue')
+      .get((req, res) => issueController.getAll(req, res))
+      .post((req, res) => issueController.create(req, res));
 
     router.route('/issue/:issueId([0-9]+)/resolve').put((req, res) => issueController.resolve(req, res));
   }

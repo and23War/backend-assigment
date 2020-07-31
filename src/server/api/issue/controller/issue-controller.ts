@@ -30,6 +30,16 @@ export class IssueController {
     this.issue = new IssueBusinessLogic();
   }
 
+  async getAll(req: Request, res: Response) {
+    const issueList = await this.issue.getBy({});
+
+    res.status(200).json({
+      data: {
+        issueList,
+      },
+    });
+  }
+
   async create(req: Request, res: Response) {
     try {
       const { description, nameUser, emailUser } = req.body;

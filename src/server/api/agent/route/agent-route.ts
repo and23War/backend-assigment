@@ -7,7 +7,10 @@ export class AgentRoutes {
 
     const agentController = new AgentController();
 
-    router.route('/agent').post((req, res) => agentController.create(req, res));
+    router
+      .route('/agent')
+      .get((req, res) => agentController.getAll(req, res))
+      .post((req, res) => agentController.create(req, res));
   }
 
   /**

@@ -37,6 +37,16 @@ export class AgentController {
     this.issue = new IssueBusinessLogic();
   }
 
+  async getAll(req: Request, res: Response) {
+    const agentList = await this.agent.getBy({});
+
+    res.status(200).json({
+      data: {
+        agentList,
+      },
+    });
+  }
+
   async create(req: Request, res: Response) {
     try {
       const { name, email } = req.body;
