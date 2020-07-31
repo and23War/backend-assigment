@@ -1,0 +1,68 @@
+{
+  "name": "base-backend",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "set debug=* && ts-node-dev -r tsconfig-paths/register --respawn --transpile-only ./src/server/server.ts",
+    "start": "ts-node -r tsconfig-paths/register ./src/server/server.ts",
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert",
+    "migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate",
+    "migration:create": "ts-node ./node_modules/typeorm/cli.js migration:create",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@types/express": "^4.17.7",
+    "@types/jest": "^26.0.7",
+    "@types/lodash": "^4.14.158",
+    "@types/supertest": "^2.0.10",
+    "husky": "^4.2.3",
+    "jest": "^26.2.1",
+    "supertest": "^4.0.2",
+    "ts-jest": "^26.1.4",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "tslint": "^5.16.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "class-validator": "^0.12.2",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.15.4",
+    "express-rate-limit": "^5.0.0",
+    "helmet": "^3.15.0",
+    "lodash": "^4.6.1",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1",
+    "reflect-metadata": "^0.1.10",
+    "rotating-file-stream": "^1.4.1",
+    "ts-node": "8.3.0",
+    "tsconfig-paths": "^3.9.0",
+    "typeorm": "0.2.18",
+    "winston": "^3.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/and23War/base-backend-type-express.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/and23War/base-backend-type-express/issues"
+  },
+  "homepage": "https://bitbucket.org/and23War/base-backend-type-express",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
